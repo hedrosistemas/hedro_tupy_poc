@@ -290,8 +290,8 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
 - res: resolução do sensor (8 bits ou 16 bits)
 - axis: eixo de medição (x, y, z ou all)
 - sen: sensibilidade do sensor (2, 4 ou 8) medido em g
-- bwHigh: frequência RMMS mais alta (Hz)
-- bwLow: frequência RMMS mais baixa (Hz)
+- bwHigh: frequência de corte RMMS superior (Hz)
+- bwLow: frequência de corte RMMS inferior (Hz)
 - nsCalc: tamanho do buffer de aceleração utilizado para gerar o resultado do algoritmo (Number of Samples for Calculation)
 - tSample: tempo entre amostras (segundos)
 -nSample: número de amostras coletadas
