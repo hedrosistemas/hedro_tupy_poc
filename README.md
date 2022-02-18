@@ -58,7 +58,7 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
 [
 
   {
-    "serviceType": 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7,
+    "serviceType": 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 9 | 10 | 11,
     "collectorId": "number",
     "mac": "string",
     "rssi": "number",
