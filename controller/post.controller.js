@@ -20,8 +20,8 @@ module.exports = async function postBackController(req, res) {
     switch (postBackData.serviceType) {
       case HDR_SERVICES_TYPE.health:
         const healthObj = { serviceType: 'HEALTH', mac: postBackData.mac, ...processHealth(postBackData.raw, postBackData.time) }
-        healthObj.maxTemp = parseFloat(healthObj.maxTemp)
-        healthObj.temp = parseFloat(healthObj.temp)
+        healthObj.maxTemp = parseFloat(healthObj.maxTemp).toFixed(2)
+        healthObj.temp = parseFloat(healthObj.temp).toFixed(2)
         processedMessages.push(healthObj)
         break;
       case HDR_SERVICES_TYPE.temp:
