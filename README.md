@@ -151,7 +151,6 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
     "time": "2021-09-25T05:51:21.000Z", // timestamps with time zone in Seconds or GMT 0
   },
 ]
-]
 ```
 
 ## Corpo da requisição POST depois de ter passado pela biblioteca hdr-process-data
@@ -415,6 +414,17 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
 - temp: [] array de temperaturas medidas de acordo com o nSample
 - time: [] array do momento de medicao de cada temperatura
 
+### RMS2
+- res: resolução do sensor (8 bits ou 16 bits)
+- axis: eixo de medição (x, y, z ou all)
+- sen: sensibilidade do sensor (2, 4 ou 8) medido em g
+- freq: frequência do sensor (Hz)
+- nsCalc: tamanho do buffer de aceleração utilizado para gerar o resultado do algoritmo (Number of Samples for Calculation)
+- tSample: tempo entre amostras (segundos)
+- nSample: número de amostras coletadas
+- rms2: [[]] array de array de medidas rmms coletadas de acordo com o - nSample (é um array de array porque pode ser que tenha selecionado o axis "all". Dessa forma viria as medidas para cada eixo. Exemplo: rms2: [[1, 2, 3], [1.1, 2.1, 3.1]])
+- time: [] array do momento de medicao de cada rms2
+
 ### RMMS
 - res: resolução do sensor (8 bits ou 16 bits)
 - axis: eixo de medição (x, y, z ou all)
@@ -427,7 +437,7 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
 - rmms: [[]] array de array de medidas rmms coletadas de acordo com o nSample (é um array de array porque pode ser que tenha selecionado o axis "all". Dessa forma viria as medidas para cada eixo. Exemplo: rmms: [[1, 2, 3], [1.1, 2.1, 3.1]])
 - time: [] array do momento de medicao de cada rmms
 
-### RMS2
+### TILT
 - res: resolução do sensor (8 bits ou 16 bits)
 - axis: eixo de medição (x, y, z ou all)
 - sen: sensibilidade do sensor (2, 4 ou 8) medido em g
@@ -435,8 +445,9 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
 - nsCalc: tamanho do buffer de aceleração utilizado para gerar o resultado do algoritmo (Number of Samples for Calculation)
 - tSample: tempo entre amostras (segundos)
 - nSample: número de amostras coletadas
-- rms2: [[]] array de array de medidas rmms coletadas de acordo com o - nSample (é um array de array porque pode ser que tenha selecionado o axis "all". Dessa forma viria as medidas para cada eixo. Exemplo: rms2: [[1, 2, 3], [1.1, 2.1, 3.1]])
-- time: [] array do momento de medicao de cada rms2
+- pitch: [] array de medidas pitch.
+- roll: [] array de medidas roll.
+- time: [] array do momento de medicao de cada par de inclinação.
 
 ### FFT
 - res: resolução do sensor (8 bits ou 16 bits)
@@ -459,3 +470,27 @@ Caso queira saber mais, acesse o [site do PM2](https://pm2.keymetrics.io/docs/us
 - accRaw: [[]] array de array do valor de accRaw
 - xPlot: [] janela de tempo (ms)
 - time: momento de medicao do accRaw
+
+### 4T20
+- channel: canal de medição (a, b ou ab)
+- res: resolução do sensor (8 bits ou 16 bits)
+- nSample: número de amostras coletadas
+- tSample: tempo entre amostras (segundos)
+- current: [[]] array de array do valor de corrente medida
+- time: momento de medicao do sensor
+
+### NTC
+- channel: canal de medição (a, b ou ab)
+- res: resolução do sensor (8 bits ou 16 bits)
+- nSample: número de amostras coletadas
+- tSample: tempo entre amostras (segundos)
+- temp: [[]] array de array do valor de temperatura medida
+- time: momento de medicao do sensor
+
+### POT
+- channel: canal de medição (a, b ou ab)
+- res: resolução do sensor (8 bits ou 16 bits)
+- nSample: número de amostras coletadas
+- tSample: tempo entre amostras (segundos)
+- percent: [[]] array de array do valor de referência medida
+- time: momento de medicao do sensor
