@@ -30,10 +30,10 @@ module.exports = async function postBackController(req, res) {
       case HDR_SERVICES_TYPE.rmms:
         processedMessages.push({ serviceType: 'RMMS', mac: postBackData.mac, ...processRMMS(postBackData.raw, postBackData.time) })
         break;
-      /*
       case HDR_SERVICES_TYPE.fft:
         processedMessages.push({ serviceType: 'FFT', mac: postBackData.mac, ...processFFT(postBackData.raw, postBackData.time) })
         break;
+      /*
     case HDR_SERVICES_TYPE.rms2:
       processedMessages.push({ serviceType: 'RMS2', mac: postBackData.mac, ...processRMS2(postBackData.raw, postBackData.time) })
       break;
