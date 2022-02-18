@@ -19,30 +19,34 @@ module.exports = async function postBackController(req, res) {
   postBackArray.forEach(postBackData => {
     switch (postBackData.serviceType) {
       case HDR_SERVICES_TYPE.health:
-        processedMessages.push({ serviceType: 'HEALTH', ...processHealth(postBackData.raw, postBackData.time) })
+        processedMessages.push({ serviceType: 'HEALTH', mac: postBackData.mac, ...processHealth(postBackData.raw, postBackData.time) })
         break;
       case HDR_SERVICES_TYPE.temp:
-        processedMessages.push({ serviceType: 'TEMP', ...processTemp(postBackData.raw, postBackData.time) })
+        processedMessages.push({ serviceType: 'TEMP', mac: postBackData.mac, ...processTemp(postBackData.raw, postBackData.time) })
         break;
+      /*
       case HDR_SERVICES_TYPE.rmms:
-        processedMessages.push({ serviceType: 'RMMS', ...processRMMS(postBackData.raw, postBackData.time) })
+        processedMessages.push({ serviceType: 'RMMS', mac: postBackData.mac, ...processRMMS(postBackData.raw, postBackData.time) })
         break;
       case HDR_SERVICES_TYPE.rms2:
-        processedMessages.push({ serviceType: 'RMS2', ...processRMS2(postBackData.raw, postBackData.time) })
+        processedMessages.push({ serviceType: 'RMS2', mac: postBackData.mac, ...processRMS2(postBackData.raw, postBackData.time) })
         break;
       case HDR_SERVICES_TYPE.fft:
-        processedMessages.push({ serviceType: 'FFT', ...processFFT(postBackData.raw, postBackData.time) })
+        processedMessages.push({ serviceType: 'FFT', mac: postBackData.mac, ...processFFT(postBackData.raw, postBackData.time) })
         break;
       case HDR_SERVICES_TYPE.accRaw:
-        processedMessages.push({ serviceType: 'ACC RAW', ...processAccRaw(postBackData.raw, postBackData.time) })
+        processedMessages.push({ serviceType: 'ACC RAW', mac: postBackData.mac, ...processAccRaw(postBackData.raw, postBackData.time) })
         break;
+       */
       default:
         break;
     }
   })
 
-  await axios.post('http://localhost:3333/javaurl', processedMessages)
+  if(processedMessages.length > 0) {
+    await axios.post('http://portal1-qas.tupy.com.br/CondicaoEquipamentoAPI/rest/hedro/criar', processedMessages)
+  }
 
-  res.status(200).json({})
+  res.status(200).json(processedMessages)
 
 }
