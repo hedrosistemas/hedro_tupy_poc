@@ -44,9 +44,13 @@ module.exports = async function postBackController(req, res) {
   })
 
   if(processedMessages.length > 0) {
-    await axios.post('http://portal1-qas.tupy.com.br/CondicaoEquipamentoAPI/rest/hedro/criar', processedMessages)
+    try {
+      await axios.post('http://portal1-qas.tupy.com.br/CondicaoEquipamentoAPI/rest/hedro/criar', processedMessages)
+    } catch (err) {
+      console.log(`Error posting to Java server.\nProcessed messages: ${processedMessages}\n\nError: ${err}\n\n`)
+    }
   }
 
-  res.status(200).json(processedMessages)
+  res.status(200).json({})
 
 }
