@@ -19,7 +19,10 @@ module.exports = async function postBackController(req, res) {
   postBackArray.forEach(postBackData => {
     switch (postBackData.serviceType) {
       case HDR_SERVICES_TYPE.health:
-        processedMessages.push({ serviceType: 'HEALTH', mac: postBackData.mac, ...processHealth(postBackData.raw, postBackData.time) })
+        const healthObj = { serviceType: 'HEALTH', mac: postBackData.mac, ...processHealth(postBackData.raw, postBackData.time) }
+        healthObj.maxTemp = parseFloat(healthObj.maxTemp)
+        healthObj.temp = parseFloat(healthObj.temp)
+        processedMessages.push(healthObj)
         break;
       case HDR_SERVICES_TYPE.temp:
         processedMessages.push({ serviceType: 'TEMP', mac: postBackData.mac, ...processTemp(postBackData.raw, postBackData.time) })
@@ -43,7 +46,7 @@ module.exports = async function postBackController(req, res) {
     }
   })
 
-  if(processedMessages.length > 0) {
+  if (processedMessages.length > 0) {
     try {
       await axios.post('http://portal1-qas.tupy.com.br/CondicaoEquipamentoAPI/rest/hedro/criar', processedMessages)
     } catch (err) {
