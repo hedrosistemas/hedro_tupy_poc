@@ -50,7 +50,7 @@ module.exports = async function postBackController(req, res) {
     try {
       await axios.post('http://portal1-qas.tupy.com.br/CondicaoEquipamentoAPI/rest/hedro/criar', processedMessages)
     } catch (err) {
-      console.log(`Error posting to Java server.\nProcessed messages: ${processedMessages}\n\nError: ${err}\n\n`)
+      console.log(`Error posting to Java server.\nProcessed messages: ${JSON.stringify(processedMessages)}\n\nError: ${err}\n\n`)
     }
   }
 
