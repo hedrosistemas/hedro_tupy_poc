@@ -1,4 +1,7 @@
-const { processHealth, processTemp, processRMMS, processAccRaw, processFFT, processRMS2, HDR_SERVICES_TYPE } = require('hdr-process-data')
+const {
+  processHealth, processTemp, processRMMS, processAccRaw, processFFT, processRMS2, HDR_SERVICES_TYPE,
+  processTilt, process4T20, processNTC, processPOT
+} = require('hdr-process-data')
 const { default: axios } = require('axios')
 
 /**
@@ -30,17 +33,27 @@ module.exports = async function postBackController(req, res) {
       case HDR_SERVICES_TYPE.rmms:
         processedMessages.push({ serviceType: 'RMMS', mac: postBackData.mac, ...processRMMS(postBackData.raw, postBackData.time) })
         break;
-      /*
-      case HDR_SERVICES_TYPE.fft:
-        processedMessages.push({ serviceType: 'FFT', mac: postBackData.mac, ...processFFT(postBackData.raw, postBackData.time) })
-        break;
-    case HDR_SERVICES_TYPE.rms2:
-      processedMessages.push({ serviceType: 'RMS2', mac: postBackData.mac, ...processRMS2(postBackData.raw, postBackData.time) })
-      break;
-    case HDR_SERVICES_TYPE.accRaw:
-      processedMessages.push({ serviceType: 'ACC RAW', mac: postBackData.mac, ...processAccRaw(postBackData.raw, postBackData.time) })
-      break;
-     */
+      // case HDR_SERVICES_TYPE.rms2:
+      //   processedMessages.push({ serviceType: 'RMS2', mac: postBackData.mac, ...processRMS2(postBackData.raw, postBackData.time) })
+      //   break;
+      // case HDR_SERVICES_TYPE.tilt:
+      //   processedMessages.push({ serviceType: 'TILT', mac: postBackData.mac, ...processTilt(postBackData.raw, postBackData.time) })
+      //   break;
+      // case HDR_SERVICES_TYPE.fft:
+      //   processedMessages.push({ serviceType: 'FFT', mac: postBackData.mac, ...processFFT(postBackData.raw, postBackData.time) })
+      //   break;
+      // case HDR_SERVICES_TYPE.accRaw:
+      //   processedMessages.push({ serviceType: 'ACC RAW', mac: postBackData.mac, ...processAccRaw(postBackData.raw, postBackData.time) })
+      //   break;
+      // case HDR_SERVICES_TYPE._4t20:
+      //   processedMessages.push({ serviceType: '_4T20', mac: postBackData.mac, ...process4T20(postBackData.raw, postBackData.time) })
+      //   break;
+      // case HDR_SERVICES_TYPE.ntc:
+      //   processedMessages.push({ serviceType: 'NTC', mac: postBackData.mac, ...processNTC(postBackData.raw, postBackData.time) })
+      //   break;
+      // case HDR_SERVICES_TYPE.pot:
+      //   processedMessages.push({ serviceType: 'POT', mac: postBackData.mac, ...processPOT(postBackData.raw, postBackData.time) })
+      //   break;
       default:
         break;
     }
